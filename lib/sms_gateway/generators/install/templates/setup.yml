@@ -1,0 +1,19 @@
+---
+
+development:
+    adapter: sms_gateway_me
+    email: your-email@gmail.com
+    password: password
+    device: device_number
+
+test:
+    adapter: sms_gateway_me
+    email: your-email@gmail.com
+    password: password
+    device: device_number
+
+production:
+    adapter: sms_gateway_me
+    email: your-email@gmail.com
+    password: password
+    device: device_number

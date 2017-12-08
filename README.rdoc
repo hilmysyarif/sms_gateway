@@ -1,0 +1,64 @@
+= SMS Gateway
+
+The SMS Gateway gem provides a simple and extensible interface for
+various SMS Gateways. It is loosely oriented on Action Mailer. The
+gem allows you to create an SMS and deliver it synchronously or
+asynchronously. So far it ships with the following adapters:
+
+* smsgateway.me
+
+
+= Installation
+
+You install the gem in your rails app by adding it your +Gemfile+:
+
+    gem "sms_gateway", '0.3.0', github:'hilmysyarif/sms_gateway', branch: 'master'
+
+
+After that you run the <tt>bundle install</tt> task and then invoke the
+gem's generator:
+
+    SmsGateway::Utilities.install
+
+which installs an initializer and a yml file that you will need
+to configure before sending out an SMS.
+
+
+== Resque and Redis
+
+To deliver SMS asynchronously this gem makes use of resque, a popular
+queing system basd on the key-value data store redis. You need
+to have a working resque and redis setup if you want to use the
+aynchronous sending feature. For more information on resque visit
+https://github.com/defunkt/resque .
+
+
+= Usage
+
+Similar to action mailer you create a message object first:
+
+    m = SmsGateway::Sms.new(number: 'xxxxxxxxx', message: 'this is a test send message')
+
+Or you can send to multiple number with array number:
+
+    m = SmsGateway::Sms.new(number: ['xxxxxxxxx', 'xxxxxx'], message: 'this is a test send message')
+
+And then deliver it with:
+
+    m.deliver
+
+
+This will block until the the HTTP call is complete. As with email it's
+better practice to enqueue the call:
+
+    m.deliver_later
+
+This will be non-blocking and is the recommended way of sending an SMS.
+This requires a resque worker, though, to get actually sent (see the
+resque documentation):
+
+    rake resque:work
+
+= License
+
+GPLv3. Copyright 2017 Hilmy Syarif.
