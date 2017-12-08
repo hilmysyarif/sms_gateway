@@ -37,11 +37,11 @@ https://github.com/defunkt/resque .
 
 Similar to action mailer you create a message object first:
 
-    m = SmsGateway::Sms.new(number: 'xxxxxxxxx', message: 'this is a test send message')
+    m = SmsGateway::Sms.new(number: 'xxxxxxxxx', message: 'this is a test send message', device: 'DeviceNumber')
 
 Or you can send to multiple number with array number:
 
-    m = SmsGateway::Sms.new(number: ['xxxxxxxxx', 'xxxxxx'], message: 'this is a test send message')
+    m = SmsGateway::Sms.new(number: ['xxxxxxxxx', 'xxxxxx'], message: 'this is a test send message', device: 'DeviceNumber')
 
 And then deliver it with:
 
