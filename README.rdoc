@@ -16,7 +16,7 @@ You install the gem in your rails app by adding it your +Gemfile+:
 
 
 After that you run the <tt>bundle install</tt> task and then invoke the
-gem's generator:
+gem's generator, you must run the generator on rails console:
 
     SmsGateway::Utilities.install
 
